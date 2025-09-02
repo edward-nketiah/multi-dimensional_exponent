@@ -19,7 +19,7 @@ y1 = space_time_data(:,2);
 t1 = space_time_data(:,3);
 t1 = t1-t1(1);%Time Shift
 n = length(x1);
-n1 = 500;%The most recent 200 points are used for calculation
+n1 = 200;%The most recent 200 points are used for calculation
 X = zeros(n1-1,n-1);%This value indicates that the n1 data points closest to the time point are used to calculate g in lambda
 Y = X;
 T = X;
@@ -58,7 +58,7 @@ q=mod(i-1,3);
 best_init_a = best_init_all{i};
 disp(length(best_init_a))
 tic
-% [x, fval, exitflag, output] = fmincon(@(a)li_fun(a,space_time_data,X,Y,T,p+1,q+1),int_a,[],[],[],[],zeros(1,4*(p+q+2)),[],[]);
+
 [x, fval, exitflag, output] = fmincon(@(a)li_fun1(a,x1,y1,t1,X,Y,T,[0 20 0 20],p+1,q+1),best_init_a,[],[],[],[],zeros(1,5*(p+1)+4*(q+1)),[],@(x)mycon(x,p+1,q+1));
 toc
 BIC{1,i} = x;
@@ -93,8 +93,6 @@ g_cor = 0:0.01:50;
 g1_cor = -0.05:0.001:0.05;
 g2_cor = -0.5:0.01:0.5;
 
-%g1_cor = -1:0.01:1;
-%g2_cor = -1:0.01:1;
 n = length(g_cor);
 n1 = length(g1_cor);
 n2 = length(g2_cor);
@@ -186,4 +184,5 @@ plot(g1_cor,sum(g_x,1)/nor_g)
 subplot(2,3,5)
 plot(g2_cor,sum(g_y,1)/nor_g)
 subplot(2,3,6)
+
 plot(g_cor,sum(g_t,1)/nor_g)
