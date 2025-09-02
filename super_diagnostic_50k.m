@@ -4,7 +4,7 @@ clc
 tic
 dbstop if error
 S = [20,20];
-T = [0,5000];%At 1350, there are about 5,000 samples; at 15,500, there are about 100,000 samples
+T = [0,1350];%At 1350, there are about 5,000 samples; at 15,500, there are about 100,000 samples
 [space_time_data,N1,N_b] = fgenerate_data_CRIME(S,T(2));
 Bound = size(space_time_data,1);
 N1 = N1(2001:Bound-2000);% we disregard the first and last 2000
@@ -43,9 +43,9 @@ p = 0 + 1;
 q = 0 + 1;
 for i = 1:19
  [data,~,k] = di_method(x,x1,y1,t1,X,Y,T,S,p,q);
- n = poissrnd(k*S(2)*S(4)*15500); 
+ n = poissrnd(k*S(2)*S(4)*1350); 
   if n>0
-    space_time_data0 = [rand(n,1)*S(2),rand(n,1)*S(4),rand(n,1)*15500];
+    space_time_data0 = [rand(n,1)*S(2),rand(n,1)*S(4),rand(n,1)*1350];
     x10 = space_time_data0(:,1);%Space-time coordinates
     y10 = space_time_data0(:,2);
     t10 = space_time_data0(:,3);
@@ -65,9 +65,9 @@ for i = 1:19
     % using the super thin simulate inhomogeneous Poisson process with rate
     % max(k-lambda,0)
     super_thin_rate = max((k-lambda),0);
-    n_super = poissrnd(sum(super_thin_rate)*S(2)*S(4)*15500);
+    n_super = poissrnd(sum(super_thin_rate)*S(2)*S(4)*1350);
     sup_rand_vals = rand(n_super,3);
-    super_thin_data = [sup_rand_vals(:,1)*S(2),sup_rand_vals(:,2)*S(4),sup_rand_vals(:,3)*15500];
+    super_thin_data = [sup_rand_vals(:,1)*S(2),sup_rand_vals(:,2)*S(4),sup_rand_vals(:,3)*1350];
     
     data = [space_time_data0(temp,:);super_thin_data];
   end
@@ -78,29 +78,7 @@ for i = 1:19
  L(i,:) = sqrt(K/pi)-dist';
  L1(i,:) = sqrt(K1/pi)-dist';
 end
-%subplot(1,2,1)
-%plot(data(:,1),data(:,2),'.')
-%subplot(1,2,2)
-%plot(x(:,1),x(:,2),'.')
-% plot(data(:,1),data(:,2),'.')
-% claculating  the 95% confidence bound for both L and L1
-% Calculate the 95% confidence bounds for both L and L1
-%lower_bound_L = prctile(L, 2.5, 1);   % 5% lower bound
-%upper_bound_L = prctile(L, 97.5, 1);  % 95% upper bound
 
-%lower_bound_L1 = prctile(L1, 2.5, 1);   % 5% lower bound for homogeneous Poisson process
-%upper_bound_L1 = prctile(L1, 97.5, 1);  % 95% upper bound for homogeneous Poisson process
-
-% Mean values of L-functions
-%mean_L = mean(L, 1);
-%mean_L1 = mean(L1, 1);
-
-%std_L = std(L);
-%n = size(L,1);
-%SE_L = std_L/sqrt(n);
-
-%upper_bound = mean_L + 2*SE_L;
-%lower_bound = mean_L - 2*SE_L;
 % Plot the L-functions and their confidence intervals
 figure(1)
 %subplot(1, 2, 1)
@@ -117,4 +95,5 @@ plot(dist,mean(L),'k-')
 %hold on
 plot(dist,[min(L1);max(L1)],'r-')
 hold off
+
 
