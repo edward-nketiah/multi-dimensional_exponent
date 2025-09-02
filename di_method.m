@@ -32,26 +32,9 @@ for j = 1:q
         .*(normcdf(y_2,y1,(2*a(5*p+2*q+j)).^-0.5)-normcdf(y_1,y1,(2*a(5*p+2*q+j)).^-0.5))...
 *pi*(a(5*p+q+j)*a(5*p+2*q+j))^-0.5;
 end
-% k = (-a(1:p)*A+sum(a(6*p+1:6*p+q)*(B.*H)))/S(2)/S(4);%calculate k
 lambda = a(1:p)*mu + a(5*p+1:5*p+q)*G;
-%disp(a(1:p));
-%disp(mu);
-%disp(G);
-%disp(a(6*p+1:6*p+q));
-% temp = x1>70;
-% x11 = x1(temp);
-% lambda1 = lambda(temp);
-% y11 = y1(temp);
-% temp = x11<100;
-% lambda1 = lambda1(temp);
-% y11 = y11(temp);
-% temp = y11<35;
-% y11 = y11(temp);
-% lambda1 = lambda1(temp);
-% temp = y11>20;
-% lambda1 = lambda1(temp);
-% k = prctile(lambda,0.5);%百分位数
-%k = min(lambda);
+
 k = lambda/(20*20*15500); % where the 15500 represents the length of time
 temp = (576*lambda.^-1./sum(lambda.^-1))>rand(1,n);
+
 data = [x1(temp),y1(temp),t1(temp)];
