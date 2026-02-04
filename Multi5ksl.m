@@ -1,5 +1,5 @@
 
-S = load('x_mles_5k_data.mat');   % loads x_mles_kept, keep_idx, p, q, ...
+S = load('x_mles_5k_data.mat');   
 
 x_mles_kept = S.x_mles_kept;
 p = 0; 
@@ -122,5 +122,6 @@ fprintf('  omega2 : mean = %.6f, var = %.6e\n', omega2_mean, omega2_var);
 fprintf('  sigma_x2: mean = %.6f, var = %.6e\n', sigma_x2_mean, sigma_x2_var);
 fprintf('  sigma_y2: mean = %.6f, var = %.6e\n', sigma_y2_mean, sigma_y2_var);
 fprintf('=======================================================================\n');
+
 
 
