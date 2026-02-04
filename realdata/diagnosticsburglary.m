@@ -27,7 +27,6 @@ y1 = lat_km;
 S = [15 23 15 30];
 t1 = data3(:,3);
 
-%t1 = t1-t1(1);%Time Shift
 n = length(x1);
 n1 = 200;%The most recent 200 points are used for calculation
 X = zeros(n1-1,n-1);%This value indicates that the n1 data points closest to the time point are used to calculate g in lambda
@@ -40,8 +39,6 @@ for j = 1:n1-1
     T(j,:) = t1(2:end)-[-Inf*ones(j-1,1);t1(1:end-j)];
 end
 
-% BIC_5 = load('BICN.mat');% felarrest
-% BIC_5 = BIC_5.BIC;
 
 BIC_5 = load('BICBURG2002.mat'); % felony crime
 BIC_5 = BIC_5.BIC;
@@ -76,7 +73,7 @@ for i = 1:10
     end
     [~,lambda,~] = di_method(x,x10,y10,t10,X0,Y0,T0,S,p,q);   
     
-    %temp = (k)./lambda>rand(1,n);
+
     temp = min((k./lambda),1) >rand(1,n);
     % using the super thin simulate inhomogeneous Poisson process with rate
     % max(k-lambda,0)
@@ -97,32 +94,10 @@ for i = 1:10
  L(i,:) = sqrt(K/pi)-dist';
  L1(i,:) = sqrt(K1/pi)-dist';
 end
-%subplot(1,2,1)
-%plot(data(:,1),data(:,2),'.')
-%subplot(1,2,2)
-%plot(x(:,1),x(:,2),'.')
-% plot(data(:,1),data(:,2),'.')
-% claculating  the 95% confidence bound for both L and L1
-% Calculate the 95% confidence bounds for both L and L1
-%lower_bound_L = prctile(L, 2.5, 1);   % 5% lower bound
-%upper_bound_L = prctile(L, 97.5, 1);  % 95% upper bound
 
-%lower_bound_L1 = prctile(L1, 2.5, 1);   % 5% lower bound for homogeneous Poisson process
-%upper_bound_L1 = prctile(L1, 97.5, 1);  % 95% upper bound for homogeneous Poisson process
 
-% Mean values of L-functions
-%mean_L = mean(L, 1);
-%mean_L1 = mean(L1, 1);
-
-%std_L = std(L);
-%n = size(L,1);
-%SE_L = std_L/sqrt(n);
-
-%upper_bound = mean_L + 2*SE_L;
-%lower_bound = mean_L - 2*SE_L;
 % Plot the L-functions and their confidence intervals
 figure(1)
-%subplot(1, 2, 1)
 
 plot(dist,min(L),'b-')
 hold on 
@@ -136,4 +111,5 @@ plot(dist,mean(L),'k-')
 %hold on
 plot(dist,[min(L1);max(L1)],'r-')
 hold off
+
 
