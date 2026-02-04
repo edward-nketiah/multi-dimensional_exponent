@@ -48,7 +48,7 @@ g10_b1 = 5122.35088994370; % alpha_j
 g10_b2 = 50.0081694767523;   % beta_j
 g10_b3 = 0.0998251216799322;  % omega
 
-% these functions are for the 1 x10^5 values plot
+% these functions are for the 5 x10^4 values plot
 mu_x2 = mu0(mu10_b0,mu10_b1,mu10_b2,mu10_b3,mu10_b4,mu_cor,mu10_b3)*(pi/mu10_b4)^0.5;
 mu_y2 = mu0(mu10_b0,mu10_b1,mu10_b2,mu10_b3,mu10_b4,mu10_b1,mu_cor)*(pi/mu10_b2)^0.5;
 %mu_t2 = mu0(mu10_b0,mu10_b1,mu10_b2,mu10_b3,mu10_b4,mu10_b5,mu10_b1,0,mu1_cor)*pi/(mu10_b2*mu10_b4)^0.5;
@@ -126,3 +126,4 @@ hold on
 plot(g_cor,sum(g_t1,1)/nor_g1,'r-')
 xlabel('g(t)')
 legend('Estimated values with 5 x 10^3 data size','Estimated values with 5 x 10^4 data size','True Values')
+
