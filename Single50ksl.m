@@ -1,4 +1,4 @@
-S = load('x_mles_50k_singledata.mat');   % loads x_mles_kept, keep_idx, p, q, ...
+S = load('x_mles_50k_singledata.mat');  
 
 x_mles_kept = S.x_mles_kept;
 p = 0; 
@@ -9,17 +9,17 @@ p_tr = p+1;
 q_tr = q+1;
 %n_params = 5*(p+1) + 4*(q+1); 
 
-% Raw mean/var across kept
+% Raw mean/var 
 x_mean = mean(x_mles_kept, 1);
 x_var  = var( x_mles_kept, 0, 1);
 
-fprintf('\n================ Across-kept estimates =================\n');
+fprintf('\n================ estimates =================\n');
 for k = 1:numel(x_mean)
     fprintf('param %2d: mean = %+ .6f, var = %.6e\n', k, x_mean(k), x_var(k));
 end
 fprintf('========================================================\n');
 
-% Transformed arrays sized to N_kept (NOT n_sim)
+% Transformed arrays sized to N_kept 
 n_kept = size(x_mles_kept, 1);
 
 mu_bar1_all   = NaN(n_kept,1);
@@ -36,8 +36,10 @@ sigma_y_all   = NaN(n_kept,1);
 
 for ii = 1:n_kept
     xs = x_mles_kept(ii,:);
-    if any(~isfinite(xs)), continue, end   % skip this sim
-    % Background (matches your print formulas)
+    if any(~isfinite(xs)) 
+        continue 
+    end   
+    % Background 
     t1b = (2*xs(2*p_tr+1))^(-0.5);
     t2b = (2*xs(4*p_tr+1))^(-0.5);
 
@@ -48,7 +50,7 @@ for ii = 1:n_kept
     sigma_mu1_all(ii) = t1b;
     sigma_mu2_all(ii) = t2b;
 
-    % Triggering (matches your print formulas)
+    % Triggering 
     t1g = (2*xs(5*p_tr+q_tr+1))^(-0.5);
     t2g = (2*xs(5*p_tr+2*q_tr+1))^(-0.5);
 
@@ -101,3 +103,4 @@ fprintf('===================================================================\n')
 
 
 fprintf('\n=========== Transformed estimates across %d simulations ===========\n', n_kept);
+
