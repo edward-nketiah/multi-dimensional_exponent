@@ -83,7 +83,7 @@ sigma_x_var = var(sigma_x_all,0);
 sigma_y_mean = mean(sigma_y_all);   
 sigma_y_var = var(sigma_y_all,0);
 
-% Optional: print them now
+
 fprintf('\n=========== Transformed estimates across %d simulations ===========\n', n_kept);
 fprintf('Background:\n');
 fprintf('  mu_bar1: mean = %.6f, var = %.6e\n', mu_bar1_mean, mu_bar1_var);
@@ -103,4 +103,5 @@ fprintf('===================================================================\n')
 
 
 fprintf('\n=========== Transformed estimates across %d simulations ===========\n', n_kept);
+
 
