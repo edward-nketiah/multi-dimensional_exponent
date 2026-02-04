@@ -1,5 +1,5 @@
-% ===================== RECOMPUTE SUMMARY ONLY =====================
-S = load('x_mles_50k_data.mat');   % loads x_mles_kept, keep_idx, p, q, ...
+
+S = load('x_mles_50k_data.mat');   % loads x_mles_kept, keep_idx, p, q
 
 x_mles_kept = S.x_mles_kept;
 p = 0; 
@@ -10,17 +10,17 @@ p_tr = p+1;
 q_tr = q+1;
 n_params = 5*(p+1) + 4*(q+1); 
 
-% Raw mean/var across kept
+% Raw mean/var 
 x_mean = mean(x_mles_kept, 1);
 x_var  = var( x_mles_kept, 0, 1);
 
-fprintf('\n================ Across-kept estimates =================\n');
+fprintf('\n================ estimates =================\n');
 for k = 1:numel(x_mean)
     fprintf('param %2d: mean = %+ .6f, var = %.6e\n', k, x_mean(k), x_var(k));
 end
 fprintf('========================================================\n');
 
-% Transformed arrays sized to N_kept (NOT n_sim)
+% Transformed arrays sized to N_kept 
 n_kept = size(x_mles_kept, 1);
 
 mu_bar1_all=NaN(n_kept,1); 
@@ -49,7 +49,8 @@ for ii = 1:n_kept
     mu_bar2_all(ii)=2*pi*t2b*t2b*xs(1);
     c_all(ii)=xs(p_tr+1);        % idx 2
     d_all(ii)=xs(3*p_tr+1);      % idx 4
-    sigma_mu1_all(ii)=t1b; sigma_mu2_all(ii)=t2b;
+    sigma_mu1_all(ii)=t1b; 
+    sigma_mu2_all(ii)=t2b;
 
     % Triggering (comp 1)
     t1g1=(2*xs(5*p_tr+q_tr+1))^(-0.5);   % idx 8
@@ -63,7 +64,8 @@ for ii = 1:n_kept
     t2g2=(2*xs(5*p_tr+2*q_tr+2))^(-0.5); % idx 11
     theta2_all(ii)=xs(5*p_tr+2)*2*pi*t1g2*t2g2/xs(5*p_tr+3*q_tr+2); % 7 / 13
     omega2_all(ii)=xs(5*p_tr+3*q_tr+2);  % 13
-    sigma_x2_all(ii)=t1g2; sigma_y2_all(ii)=t2g2;
+    sigma_x2_all(ii)=t1g2; 
+    sigma_y2_all(ii)=t2g2;
 end
 
 % Means/vars
@@ -98,7 +100,7 @@ sigma_x2_var = var(sigma_x2_all,0);
 sigma_y2_mean = mean(sigma_y2_all); 
 sigma_y2_var = var(sigma_y2_all,0);
 
-fprintf('\n=========== Transformed estimates across %d kept simulations ===========\n', n_kept);
+fprintf('\n=========== Transformed estimates ===========\n', n_kept);
 fprintf('Background:\n');
 fprintf('  mu_bar1: mean = %.6f, var = %.6e\n', mu_bar1_mean, mu_bar1_var);
 fprintf('  mu_bar2: mean = %.6f, var = %.6e\n', mu_bar2_mean, mu_bar2_var);
@@ -119,4 +121,5 @@ fprintf('  omega2 : mean = %.6f, var = %.6e\n', omega2_mean, omega2_var);
 fprintf('  sigma_x2: mean = %.6f, var = %.6e\n', sigma_x2_mean, sigma_x2_var);
 fprintf('  sigma_y2: mean = %.6f, var = %.6e\n', sigma_y2_mean, sigma_y2_var);
 fprintf('=======================================================================\n');
+
 
