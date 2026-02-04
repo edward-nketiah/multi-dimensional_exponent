@@ -10,7 +10,7 @@ g_par = reshape(params(6:13),[4,2]);
 
 % extrating parameter for mu
 mu_par = params(1:5); % q=1
-%num_mode = 3;
+
 
 
 mu_b0 = mu_par(1);
@@ -25,11 +25,6 @@ g_b2 = g_par(3,:);
 g_b3 = g_par(4,:);
 
 
-
-% mu_b1 = mu_b1 + 0.1;%*rand(size(mu_b1));
-% mu_b3 = mu_b3 + 0.1;%*rand(size(mu_b3));
-% mu_b2 = mu_b2*0.1;
-% mu_b4 = mu_b4*0.1;
 
 % disp(g_params);
 mu0 = @(b0,b1,b2,b3,b4,u,v)b0*exp(-b2*(u-b1).^2-b4*(v-b3).^2);
@@ -99,4 +94,5 @@ hold off
 subplot(2,3,6)
 plot(g_cor,sum(g_t,1)/nor_g)
 xticks(0:4:20);
+
 xlabel('Time(days)')
