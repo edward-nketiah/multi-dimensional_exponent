@@ -4,7 +4,7 @@ clc
 tic
 dbstop if error
 S = [20,20];
-T = [0,1350];%At 1350, there are about 5,000 samples; at 15,500, there are about 100,000 samples
+T = [0,1350];%At 1350, there are about 5,000 samples; at 15,500, there are about 50,000 plus samples
 [space_time_data,N1,N_b] = fgenerate_data_CRIME21(S,T(2));
 % [space_time_data,N1,N_b] = fgenerate_data_ETAS(S,T(2));
 Bound = size(space_time_data,1);
@@ -186,3 +186,4 @@ plot(g2_cor,sum(g_y,1)/nor_g)
 subplot(2,3,6)
 
 plot(g_cor,sum(g_t,1)/nor_g)
+
