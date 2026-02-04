@@ -1,7 +1,7 @@
 clear
 clc
 %rng(100)%0110
-% Generate artificial data
+
 data2 = load('Burglary2002.mat');
 data3 = data2.data1;
 
@@ -23,7 +23,6 @@ lon_km = lon_km - min(lon_km);
 x1 = lon_km;
 y1 = lat_km;
 
-%k = zeros(size(x1));
 S = [15 23 15 30];
 t1 = data3(:,3);
 
@@ -111,5 +110,6 @@ plot(dist,mean(L),'k-')
 %hold on
 plot(dist,[min(L1);max(L1)],'r-')
 hold off
+
 
 
